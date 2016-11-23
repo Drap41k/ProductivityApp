@@ -5,12 +5,14 @@ import '../bower_components/angular-resource';
 //import '../bower_components/angular-route';
 import '../bower_components/angular-ui-router/release/angular-ui-router';
 import '../bower_components/angular-mocks';
-import './style.css';
+import './general.scss';
 
 import login from './pages/login';
 import todo from './pages/todo';
 import welcome from './pages/welcome';
 
+import headerComponent from './shared/components/header';
+import footerComponent from './shared/components/footer';
 import navComponent from './shared/components/navigation';
 
 import userService from './shared/services/user';
@@ -23,6 +25,7 @@ angular.module('productivityApp', ['ngMockE2E', 'ngResource', 'ui.router', login
 		});
 	})
 	.run(function($httpBackend, currentUser, $rootScope, $location, $state, storage) {
+		// todo: move out run block to another file
 		storage.setDefaultData();
 
 		$rootScope.$on('$stateChangeStart', function(event, next) {
@@ -72,14 +75,9 @@ angular.module('productivityApp', ['ngMockE2E', 'ngResource', 'ui.router', login
 			return response;
 		});
 	})
-	.component('header', {
-		name: 'header',
-		template: require('./shared/components/header/header.html')
-	})
-	.component('footer', {
-		name: 'footer',
-		template: require('./shared/components/footer/footer.html')
-	})
+	.component('header', headerComponent)
+	.component('footer', footerComponent)
 	.component('navigation', navComponent)
+
 	.factory('currentUser', userService)
 	.factory('storage', storageService);

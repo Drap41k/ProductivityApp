@@ -1,8 +1,8 @@
 'use strict';
 
-export default window.angular
-	.component('header', {
-		name: 'header',
-		template: require('./header.html')
-	});
+import './header.scss'
 
+export default {
+	name: 'header',
+	template: require('./header.html')
+};

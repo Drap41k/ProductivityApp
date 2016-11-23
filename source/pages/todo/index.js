@@ -2,6 +2,7 @@
 
 import todoController from './todoController';
 import ROUTES_SCHEMA from '../../config/routes';
+import './todo.scss';
 
 export default window.angular
 	.module('productivityApp.todo', [])

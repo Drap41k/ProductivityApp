@@ -1,0 +1,39 @@
+#nav {
+	float: right;
+
+	.button {
+		display: block;
+		cursor: pointer;
+		width: 30px;
+		height: 30px;
+		background: limegreen;
+		text-indent: -9999px;
+		overflow: hidden;
+	}
+
+	ul {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		right: 0;
+		background: limegreen;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		text-align: center;
+
+		li {
+			border-top: 2px solid #fff;
+
+			&:first-child {
+				border-top: 0;
+			}
+
+			a {
+				display: block;
+				padding: 20px;
+				color: #fff;
+			}
+		}
+	}
+}

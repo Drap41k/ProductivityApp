@@ -1,0 +1,68 @@
+body {
+  margin: 0; }
+
+a {
+  text-decoration: none; }
+  a:hover {
+    text-decoration: underline; }
+
+p {
+  margin: 0 0 20px; }
+
+ui-view[name] {
+  display: block; }
+
+#content {
+  padding: 20px; }
+.todo-page .row {
+  margin: 0 0 20px; }
+
+.todo-page .list {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+  .todo-page .list .strike {
+    text-decoration: line-through; }
+#header header {
+  border-bottom: 1px solid limegreen;
+  padding: 20px;
+  position: relative; }
+
+#header .logo {
+  float: left; }
+
+#header h1 {
+  overflow: hidden;
+  margin: 0;
+  text-align: center; }
+#footer footer {
+  padding: 20px;
+  border-top: 1px solid limegreen; }
+#nav {
+  float: right; }
+  #nav .button {
+    display: block;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    background: limegreen;
+    text-indent: -9999px;
+    overflow: hidden; }
+  #nav ul {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: limegreen;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center; }
+    #nav ul li {
+      border-top: 2px solid #fff; }
+      #nav ul li:first-child {
+        border-top: 0; }
+      #nav ul li a {
+        display: block;
+        padding: 20px;
+        color: #fff; }
