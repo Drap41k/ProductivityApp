@@ -1,0 +1,8 @@
+<div>
+	<span class="button" ng-click="navigation.opened = !navigation.opened">Menu</span>
+	<ul ng-show="navigation.opened">
+		<li ng-repeat="item in navigation.menu">
+			<a ui-sref="{{item.name}}">{{item.title || item.name}}</a>
+		</li>
+	</ul>
+</div>

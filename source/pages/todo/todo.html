@@ -1,0 +1,14 @@
+<div class="todo-page">
+	<div class="row">
+		<input ng-model="todo.newTask" placeholder="Enter task title" type="text">
+		<button ng-click="todo.addTask()">+</button>
+	</div>
+	<ul class="list">
+		<li ng-repeat="item in todo.list">
+			<label ng-class="{strike: item.done}">
+				<input type="checkbox" ng-model="item.done" checked="{{item.done}}" ng-change="todo.saveState()">
+				{{item.title}}
+			</label>
+		</li>
+	</ul>
+</div>
