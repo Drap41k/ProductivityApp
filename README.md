@@ -2,23 +2,19 @@
 
 Documentation for ProductivityApp
 
- The application is built with AngularJs, NodeJS, Bower.
+To deploy this application you must have npm and bower package managers installed. First is used for server side packages installation, second for client side.
 
----
-
-## Install
-
-Before starting application you need to install all bower and node package modules
+Just do following commands in root folder:
 
 ```sh
-$ npm install
-$ bower install
+npm install
+bower install
 ```
 
-Then you need to start server
+Then you need to start server:
 
 ```sh
-$ node server.js
+node server.js
 ```
 
-Now application is available by the address [http://localhost:3000/#](http://localhost:3000/#/list)
+Now application is available on [http://localhost:3000/#](http://localhost:3000/#/list)
