@@ -56,6 +56,8 @@
 
 	__webpack_require__(7);
 
+	var _config = __webpack_require__(43);
+
 	var _login = __webpack_require__(11);
 
 	var _login2 = _interopRequireDefault(_login);
@@ -90,61 +92,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	angular.module('productivityApp', ['ngMockE2E', 'ngResource', 'ui.router', _login2.default, _welcome2.default, _todo2.default]).config(function ($stateProvider) {
-		$stateProvider.state('logout', {
-			url: '/logout'
-		});
-	}).run(function ($httpBackend, currentUser, $rootScope, $location, $state, storage) {
-		// todo: move out run block to another file
-		storage.setDefaultData();
-
-		$rootScope.$on('$stateChangeStart', function (event, next) {
-			var userRegistered = !!currentUser.getUser();
-
-			switch (next.name) {
-				case 'login':
-					if (userRegistered) {
-						changeState(event, 'welcome');
-					}
-					break;
-				case 'logout':
-					currentUser.logout();
-					changeState(event, 'login');
-					break;
-				default:
-					if (!userRegistered) {
-						changeState(event, 'login');
-					}
-					break;
-			}
-		});
-
-		function changeState(event, nextName) {
-			event.preventDefault();
-			$state.go(nextName);
-		}
-
-		// attempt to login user
-		$httpBackend.whenPOST('/users').respond(function (method, url, data) {
-			var userData = window.angular.fromJson(data);
-			var registeredUsers = window.angular.fromJson(window.localStorage.usersList);
-			var index = registeredUsers.length;
-			var response = [401, 'No such user or invalid password'];
-
-			while (index--) {
-				if (registeredUsers[index].username === userData.username) {
-					if (registeredUsers[index].password === userData.password) {
-						currentUser.setUser(registeredUsers[index]);
-						response = [200, registeredUsers[index]];
-					}
-					break;
-				}
-			}
-
-			return response;
-		});
-	}).component('header', _header2.default).component('footer', _footer2.default).component('navigation', _navigation2.default).factory('currentUser', _user2.default).factory('storage', _storage2.default);
-	//import '../bower_components/angular-route';
+	angular.module('productivityApp', ['ngMockE2E', 'ngResource', 'ui.router', _login2.default, _welcome2.default, _todo2.default]).config(_config.config).run(_config.run).component('header', _header2.default).component('footer', _footer2.default).component('navigation', _navigation2.default).factory('currentUser', _user2.default).factory('storage', _storage2.default);
 
 /***/ },
 /* 1 */
@@ -41068,6 +41016,77 @@
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.config = config;
+	exports.run = run;
+	function config($stateProvider) {
+		$stateProvider.state('logout', {
+			url: '/logout'
+		});
+	}
+
+	function run($httpBackend, currentUser, $rootScope, $location, $state, storage) {
+		storage.setDefaultData();
+
+		$rootScope.$on('$stateChangeStart', function (event, next) {
+			var userRegistered = !!currentUser.getUser();
+
+			switch (next.name) {
+				case 'login':
+					if (userRegistered) {
+						changeState(event, 'welcome');
+					}
+					break;
+				case 'logout':
+					currentUser.logout();
+					changeState(event, 'login');
+					break;
+				default:
+					if (!userRegistered) {
+						changeState(event, 'login');
+					}
+					break;
+			}
+		});
+
+		function changeState(event, nextName) {
+			event.preventDefault();
+			$state.go(nextName);
+		}
+
+		// attempt to login user
+		$httpBackend.whenPOST('/users').respond(function (method, url, data) {
+			var userData = window.angular.fromJson(data);
+			var registeredUsers = window.angular.fromJson(window.localStorage.usersList);
+			var index = registeredUsers.length;
+			var response = [401, 'No such user or invalid password'];
+
+			while (index--) {
+				if (registeredUsers[index].username === userData.username) {
+					if (registeredUsers[index].password === userData.password) {
+						currentUser.setUser(registeredUsers[index]);
+						response = [200, registeredUsers[index]];
+					}
+					break;
+				}
+			}
+
+			return response;
+		});
+	}
 
 /***/ }
 /******/ ]);

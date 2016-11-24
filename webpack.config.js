@@ -11,9 +11,7 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: './source/index.html'
 		}),
-		new ExtractTextPlugin('styles.css', {
-			allChunks: true
-		}),
+		new ExtractTextPlugin('styles.css'),
 	],
 	module: {
 		loaders: [
