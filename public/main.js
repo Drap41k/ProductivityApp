@@ -56,37 +56,37 @@
 
 	__webpack_require__(7);
 
-	var _config = __webpack_require__(43);
+	var _config = __webpack_require__(11);
 
-	var _login = __webpack_require__(11);
+	var _login = __webpack_require__(12);
 
 	var _login2 = _interopRequireDefault(_login);
 
-	var _todo = __webpack_require__(15);
+	var _todo = __webpack_require__(16);
 
 	var _todo2 = _interopRequireDefault(_todo);
 
-	var _welcome = __webpack_require__(20);
+	var _welcome = __webpack_require__(21);
 
 	var _welcome2 = _interopRequireDefault(_welcome);
 
-	var _header = __webpack_require__(34);
+	var _header = __webpack_require__(24);
 
 	var _header2 = _interopRequireDefault(_header);
 
-	var _footer = __webpack_require__(37);
+	var _footer = __webpack_require__(28);
 
 	var _footer2 = _interopRequireDefault(_footer);
 
-	var _navigation = __webpack_require__(23);
+	var _navigation = __webpack_require__(32);
 
 	var _navigation2 = _interopRequireDefault(_navigation);
 
-	var _user = __webpack_require__(29);
+	var _user = __webpack_require__(38);
 
 	var _user2 = _interopRequireDefault(_user);
 
-	var _storage = __webpack_require__(30);
+	var _storage = __webpack_require__(39);
 
 	var _storage2 = _interopRequireDefault(_storage);
 
@@ -40509,520 +40509,6 @@
 /* 9 */,
 /* 10 */,
 /* 11 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _loginController = __webpack_require__(12);
-
-	var _loginController2 = _interopRequireDefault(_loginController);
-
-	var _routes = __webpack_require__(13);
-
-	var _routes2 = _interopRequireDefault(_routes);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = window.angular.module('productivityApp.login', ['ngResource', 'ui.router']).config(function ($stateProvider) {
-		$stateProvider.state({
-			name: 'login',
-			url: _routes2.default.login,
-			views: {
-				content: {
-					template: __webpack_require__(14),
-					controller: 'formCtrl as form'
-				}
-			}
-		});
-	}).controller('formCtrl', ['$resource', '$location', 'currentUser', _loginController2.default]).name;
-
-/***/ },
-/* 12 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	exports.default = function ($resource, $location) {
-		this.submit = function (e) {
-			e.preventDefault();
-			var result = {};
-			var inputs = e.target.elements;
-			for (var i = 0; i < inputs.length; i++) {
-				var input = inputs[i];
-
-				if (!input.name) {
-					continue;
-				}
-
-				result[input.name] = input.value;
-			}
-			$resource('/users').save(result, function () {
-				$location.path(_routes2.default.welcome);
-			}, function (response) {
-				console.log('Error: ', response.data);
-			});
-		};
-	};
-
-	var _routes = __webpack_require__(13);
-
-	var _routes2 = _interopRequireDefault(_routes);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	;
-
-/***/ },
-/* 13 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.default = {
-		login: '/',
-		welcome: '/welcome',
-		list: '/list'
-	};
-
-/***/ },
-/* 14 */
-/***/ function(module, exports) {
-
-	module.exports = "<form name=\"AuthorizeForm\" ng-submit=\"form.submit($event)\" novalidate>\n\t<input type=\"email\" name=\"username\" placeholder=\"username\" required />\n\t<input type=\"password\" name=\"password\" placeholder=\"password\" required />\n\t<!--<input type=\"text\" ng-model=\"form.xyu\" />-->\n\t<input type=\"submit\" value=\"Login\" />\n\t<!--<field type=\"text\" field-model=\"form.xyu\"></field>-->\n</form>";
-
-/***/ },
-/* 15 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _todoController = __webpack_require__(16);
-
-	var _todoController2 = _interopRequireDefault(_todoController);
-
-	var _routes = __webpack_require__(13);
-
-	var _routes2 = _interopRequireDefault(_routes);
-
-	__webpack_require__(17);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = window.angular.module('productivityApp.todo', []).config(function ($stateProvider) {
-		$stateProvider.state({
-			name: 'todo',
-			url: _routes2.default.list,
-			views: {
-				header: {
-					template: '<header></header>'
-				},
-				content: {
-					template: __webpack_require__(19),
-					controller: 'todoCtrl as todo'
-				},
-				footer: {
-					template: '<footer></footer>'
-				}
-			}
-		});
-	}).controller('todoCtrl', ['currentUser', _todoController2.default]).name;
-
-/***/ },
-/* 16 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	exports.default = function (currentUser) {
-		this.list = currentUser.getUser().list;
-		this.saveState = function () {
-			currentUser.saveParams({ list: this.list });
-		};
-
-		this.addTask = function () {
-			if (!this.newTask) {
-				return;
-			}
-			this.list.push({ title: this.newTask });
-			delete this.newTask;
-			this.saveState();
-		};
-	};
-
-	;
-
-/***/ },
-/* 17 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 18 */,
-/* 19 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"todo-page\">\n\t<div class=\"row\">\n\t\t<input ng-model=\"todo.newTask\" placeholder=\"Enter task title\" type=\"text\">\n\t\t<button ng-click=\"todo.addTask()\">+</button>\n\t</div>\n\t<ul class=\"list\">\n\t\t<li ng-repeat=\"item in todo.list\">\n\t\t\t<label ng-class=\"{strike: item.done}\">\n\t\t\t\t<input type=\"checkbox\" ng-model=\"item.done\" checked=\"{{item.done}}\" ng-change=\"todo.saveState()\">\n\t\t\t\t{{item.title}}\n\t\t\t</label>\n\t\t</li>\n\t</ul>\n</div>";
-
-/***/ },
-/* 20 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _welcomeController = __webpack_require__(21);
-
-	var _welcomeController2 = _interopRequireDefault(_welcomeController);
-
-	var _routes = __webpack_require__(13);
-
-	var _routes2 = _interopRequireDefault(_routes);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = window.angular.module('productivityApp.welcome', []).config(function ($stateProvider) {
-		$stateProvider.state({
-			name: 'welcome',
-			url: _routes2.default.welcome,
-			views: {
-				header: {
-					template: '<header></header>'
-				},
-				content: {
-					template: __webpack_require__(22),
-					controller: 'welcomeCtrl as welcome'
-				},
-				footer: {
-					template: '<footer></footer>'
-				}
-			}
-		});
-	}).controller('welcomeCtrl', ['$location', 'currentUser', _welcomeController2.default]).name;
-	//import headerComp from '../../shared/components/header';
-
-/***/ },
-/* 21 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	exports.default = function ($location, currentUser) {
-		var user = currentUser.getUser();
-		this.name = user.username;
-		this.counter = user.list.filter(function (item) {
-			return !item.done;
-		}).length;
-
-		this.next = function () {
-			$location.path(_routes2.default.list);
-		};
-	};
-
-	var _routes = __webpack_require__(13);
-
-	var _routes2 = _interopRequireDefault(_routes);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	;
-
-/***/ },
-/* 22 */
-/***/ function(module, exports) {
-
-	module.exports = "<div>\n\t<h1>Hello {{welcome.name}}</h1>\n\t<p>You have {{welcome.counter}} pending tasks</p>\n\t<button ng-click=\"welcome.next()\">Get to work!</button>\n</div>";
-
-/***/ },
-/* 23 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _navigationController = __webpack_require__(24);
-
-	var _navigationController2 = _interopRequireDefault(_navigationController);
-
-	__webpack_require__(26);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-		name: 'navigation',
-		template: __webpack_require__(28),
-		controller: _navigationController2.default,
-		controllerAs: 'navigation'
-	};
-
-/***/ },
-/* 24 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	exports.default = function (storage, $state) {
-		this.opened = false;
-		this.state = $state.current.name;
-		this.menu = _menu2.default;
-		this.logout = function () {
-			storage.clear();
-			$state.go('login');
-		};
-	};
-
-	var _menu = __webpack_require__(25);
-
-	var _menu2 = _interopRequireDefault(_menu);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	;
-
-/***/ },
-/* 25 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.default = [{
-		name: 'welcome'
-	}, {
-		title: 'Sign out',
-		name: 'logout'
-	}, {
-		title: 'About us',
-		name: 'todo'
-	}];
-
-/***/ },
-/* 26 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 27 */,
-/* 28 */
-/***/ function(module, exports) {
-
-	module.exports = "<div>\n\t<span class=\"button\" ng-click=\"navigation.opened = !navigation.opened\">Menu</span>\n\t<ul ng-show=\"navigation.opened\">\n\t\t<li ng-repeat=\"item in navigation.menu\">\n\t\t\t<a ui-sref=\"{{item.name}}\">{{item.title || item.name}}</a>\n\t\t</li>\n\t</ul>\n</div>";
-
-/***/ },
-/* 29 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	exports.default = function (storage) {
-		var currentUser = void 0;
-
-		function setUser(user) {
-			currentUser = user;
-			saveToStorage();
-		}
-
-		function getUser() {
-			if (!currentUser) {
-				currentUser = storage.get('currentUser');
-			}
-			return currentUser;
-		}
-
-		function saveToStorage() {
-			storage.save('currentUser', currentUser);
-		}
-
-		return {
-			setUser: setUser,
-			getUser: getUser,
-			saveParams: function saveParams(params) {
-				window.angular.extend(currentUser, params);
-				saveToStorage();
-			},
-			logout: function logout() {
-				storage.clear();
-				currentUser = null;
-			}
-		};
-	};
-
-	;
-
-/***/ },
-/* 30 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	exports.default = function () {
-		var storage = window.localStorage;
-
-		function setDefaultData() {
-			storage.usersList = angular.toJson([{
-				username: 'admin',
-				password: 'admin',
-				list: _todo2.default
-			}]);
-		}
-
-		return {
-			set: function set(key, value) {
-				storage[key] = window.angular.toJson(value);
-			},
-			get: function get(key) {
-				return window.angular.fromJson(storage[key]);
-			},
-			save: function save(key, newValue) {
-				this.set(key, window.angular.extend(this.get(key) || {}, newValue));
-			},
-			clear: function clear() {
-				storage.clear();
-				this.setDefaultData();
-			},
-			setDefaultData: setDefaultData
-		};
-	};
-
-	var _todo = __webpack_require__(31);
-
-	var _todo2 = _interopRequireDefault(_todo);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	;
-
-/***/ },
-/* 31 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.default = [{
-		title: 'Поставить галочку',
-		done: true
-	}, {
-		title: 'Проверить, что пункт 1 выполнен',
-		done: true
-	}, {
-		title: 'Осознать, что ты уже выполнил 2 пункта',
-		done: true
-	}, {
-		title: 'Отдохнуть после проделанной работы'
-	}];
-
-/***/ },
-/* 32 */
-/***/ function(module, exports) {
-
-	module.exports = "<navigation id=\"nav\"></navigation>\n<a ui-sref=\"login\" class=\"logo\">Logo</a>\n<h1>Productivity</h1>\n";
-
-/***/ },
-/* 33 */
-/***/ function(module, exports) {
-
-	module.exports = "<div>\n\t<p>&copy; Training guys Inc.</p>\n</div>";
-
-/***/ },
-/* 34 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	__webpack_require__(35);
-
-	exports.default = {
-		name: 'header',
-		template: __webpack_require__(32)
-	};
-
-/***/ },
-/* 35 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 36 */,
-/* 37 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	__webpack_require__(38);
-
-	exports.default = {
-		name: 'footer',
-		template: __webpack_require__(33)
-	};
-
-/***/ },
-/* 38 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -41087,6 +40573,517 @@
 			return response;
 		});
 	}
+
+/***/ },
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _loginController = __webpack_require__(13);
+
+	var _loginController2 = _interopRequireDefault(_loginController);
+
+	var _routes = __webpack_require__(14);
+
+	var _routes2 = _interopRequireDefault(_routes);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = window.angular.module('productivityApp.login', ['ngResource', 'ui.router']).config(function ($stateProvider) {
+		$stateProvider.state({
+			name: 'login',
+			url: _routes2.default.login,
+			views: {
+				content: {
+					template: __webpack_require__(15),
+					controller: 'formCtrl as form'
+				}
+			}
+		});
+	}).controller('formCtrl', ['$resource', '$location', 'currentUser', _loginController2.default]).name;
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	exports.default = function ($resource, $location) {
+		this.submit = function (e) {
+			e.preventDefault();
+			var result = {};
+			var inputs = e.target.elements;
+			for (var i = 0; i < inputs.length; i++) {
+				var input = inputs[i];
+
+				if (!input.name) {
+					continue;
+				}
+
+				result[input.name] = input.value;
+			}
+			$resource('/users').save(result, function () {
+				$location.path(_routes2.default.welcome);
+			}, function (response) {
+				console.log('Error: ', response.data);
+			});
+		};
+	};
+
+	var _routes = __webpack_require__(14);
+
+	var _routes2 = _interopRequireDefault(_routes);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	;
+
+/***/ },
+/* 14 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = {
+		login: '/',
+		welcome: '/welcome',
+		list: '/list'
+	};
+
+/***/ },
+/* 15 */
+/***/ function(module, exports) {
+
+	module.exports = "<form name=\"AuthorizeForm\" ng-submit=\"form.submit($event)\" novalidate>\n\t<input type=\"email\" name=\"username\" placeholder=\"username\" required />\n\t<input type=\"password\" name=\"password\" placeholder=\"password\" required />\n\t<!--<input type=\"text\" ng-model=\"form.xyu\" />-->\n\t<input type=\"submit\" value=\"Login\" />\n\t<!--<field type=\"text\" field-model=\"form.xyu\"></field>-->\n</form>";
+
+/***/ },
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _todoController = __webpack_require__(17);
+
+	var _todoController2 = _interopRequireDefault(_todoController);
+
+	var _routes = __webpack_require__(14);
+
+	var _routes2 = _interopRequireDefault(_routes);
+
+	__webpack_require__(18);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = window.angular.module('productivityApp.todo', []).config(function ($stateProvider) {
+		$stateProvider.state({
+			name: 'todo',
+			url: _routes2.default.list,
+			views: {
+				header: {
+					template: '<header></header>'
+				},
+				content: {
+					template: __webpack_require__(20),
+					controller: 'todoCtrl as todo'
+				},
+				footer: {
+					template: '<footer></footer>'
+				}
+			}
+		});
+	}).controller('todoCtrl', ['currentUser', _todoController2.default]).name;
+
+/***/ },
+/* 17 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	exports.default = function (currentUser) {
+		this.list = currentUser.getUser().list;
+		this.saveState = function () {
+			currentUser.saveParams({ list: this.list });
+		};
+
+		this.addTask = function () {
+			if (!this.newTask) {
+				return;
+			}
+			this.list.push({ title: this.newTask });
+			delete this.newTask;
+			this.saveState();
+		};
+	};
+
+	;
+
+/***/ },
+/* 18 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 19 */,
+/* 20 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"todo-page\">\n\t<div class=\"row\">\n\t\t<input ng-model=\"todo.newTask\" placeholder=\"Enter task title\" type=\"text\">\n\t\t<button ng-click=\"todo.addTask()\">+</button>\n\t</div>\n\t<ul class=\"list\">\n\t\t<li ng-repeat=\"item in todo.list\">\n\t\t\t<label ng-class=\"{strike: item.done}\">\n\t\t\t\t<input type=\"checkbox\" ng-model=\"item.done\" checked=\"{{item.done}}\" ng-change=\"todo.saveState()\">\n\t\t\t\t{{item.title}}\n\t\t\t</label>\n\t\t</li>\n\t</ul>\n</div>";
+
+/***/ },
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _welcomeController = __webpack_require__(22);
+
+	var _welcomeController2 = _interopRequireDefault(_welcomeController);
+
+	var _routes = __webpack_require__(14);
+
+	var _routes2 = _interopRequireDefault(_routes);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = window.angular.module('productivityApp.welcome', []).config(function ($stateProvider) {
+		$stateProvider.state({
+			name: 'welcome',
+			url: _routes2.default.welcome,
+			views: {
+				header: {
+					template: '<header></header>'
+				},
+				content: {
+					template: __webpack_require__(23),
+					controller: 'welcomeCtrl as welcome'
+				},
+				footer: {
+					template: '<footer></footer>'
+				}
+			}
+		});
+	}).controller('welcomeCtrl', ['$location', 'currentUser', _welcomeController2.default]).name;
+	//import headerComp from '../../shared/components/header';
+
+/***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	exports.default = function ($location, currentUser) {
+		var user = currentUser.getUser();
+		this.name = user.username;
+		this.counter = user.list.filter(function (item) {
+			return !item.done;
+		}).length;
+
+		this.next = function () {
+			$location.path(_routes2.default.list);
+		};
+	};
+
+	var _routes = __webpack_require__(14);
+
+	var _routes2 = _interopRequireDefault(_routes);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	;
+
+/***/ },
+/* 23 */
+/***/ function(module, exports) {
+
+	module.exports = "<div>\n\t<h1>Hello {{welcome.name}}</h1>\n\t<p>You have {{welcome.counter}} pending tasks</p>\n\t<button ng-click=\"welcome.next()\">Get to work!</button>\n</div>";
+
+/***/ },
+/* 24 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	__webpack_require__(25);
+
+	exports.default = {
+		name: 'header',
+		template: __webpack_require__(27)
+	};
+
+/***/ },
+/* 25 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 26 */,
+/* 27 */
+/***/ function(module, exports) {
+
+	module.exports = "<navigation id=\"nav\"></navigation>\n<a ui-sref=\"login\" class=\"logo\">Logo</a>\n<h1>Productivity</h1>\n";
+
+/***/ },
+/* 28 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	__webpack_require__(29);
+
+	exports.default = {
+		name: 'footer',
+		template: __webpack_require__(31)
+	};
+
+/***/ },
+/* 29 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 30 */,
+/* 31 */
+/***/ function(module, exports) {
+
+	module.exports = "<div>\n\t<p>&copy; Training guys Inc.</p>\n</div>";
+
+/***/ },
+/* 32 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _navigationController = __webpack_require__(33);
+
+	var _navigationController2 = _interopRequireDefault(_navigationController);
+
+	__webpack_require__(35);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+		name: 'navigation',
+		template: __webpack_require__(37),
+		controller: _navigationController2.default,
+		controllerAs: 'navigation'
+	};
+
+/***/ },
+/* 33 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	exports.default = function (storage, $state) {
+		this.opened = false;
+		this.state = $state.current.name;
+		this.menu = _menu2.default;
+		this.logout = function () {
+			storage.clear();
+			$state.go('login');
+		};
+	};
+
+	var _menu = __webpack_require__(34);
+
+	var _menu2 = _interopRequireDefault(_menu);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	;
+
+/***/ },
+/* 34 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = [{
+		name: 'welcome'
+	}, {
+		title: 'Sign out',
+		name: 'logout'
+	}, {
+		title: 'About us',
+		name: 'todo'
+	}];
+
+/***/ },
+/* 35 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 36 */,
+/* 37 */
+/***/ function(module, exports) {
+
+	module.exports = "<div>\n\t<span class=\"button\" ng-click=\"navigation.opened = !navigation.opened\">Menu</span>\n\t<ul ng-show=\"navigation.opened\">\n\t\t<li ng-repeat=\"item in navigation.menu\">\n\t\t\t<a ui-sref=\"{{item.name}}\">{{item.title || item.name}}</a>\n\t\t</li>\n\t</ul>\n</div>";
+
+/***/ },
+/* 38 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	exports.default = function (storage) {
+		var currentUser = void 0;
+
+		function setUser(user) {
+			currentUser = user;
+			saveToStorage();
+		}
+
+		function getUser() {
+			if (!currentUser) {
+				currentUser = storage.get('currentUser');
+			}
+			return currentUser;
+		}
+
+		function saveToStorage() {
+			storage.save('currentUser', currentUser);
+		}
+
+		return {
+			setUser: setUser,
+			getUser: getUser,
+			saveParams: function saveParams(params) {
+				window.angular.extend(currentUser, params);
+				saveToStorage();
+			},
+			logout: function logout() {
+				storage.clear();
+				currentUser = null;
+			}
+		};
+	};
+
+	;
+
+/***/ },
+/* 39 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	exports.default = function () {
+		var storage = window.localStorage;
+
+		function setDefaultData() {
+			storage.usersList = angular.toJson([{
+				username: 'admin',
+				password: 'admin',
+				list: _todo2.default
+			}]);
+		}
+
+		return {
+			set: function set(key, value) {
+				storage[key] = window.angular.toJson(value);
+			},
+			get: function get(key) {
+				return window.angular.fromJson(storage[key]);
+			},
+			save: function save(key, newValue) {
+				this.set(key, window.angular.extend(this.get(key) || {}, newValue));
+			},
+			clear: function clear() {
+				storage.clear();
+				this.setDefaultData();
+			},
+			setDefaultData: setDefaultData
+		};
+	};
+
+	var _todo = __webpack_require__(40);
+
+	var _todo2 = _interopRequireDefault(_todo);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	;
+
+/***/ },
+/* 40 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = [{
+		title: 'Поставить галочку',
+		done: true
+	}, {
+		title: 'Проверить, что пункт 1 выполнен',
+		done: true
+	}, {
+		title: 'Осознать, что ты уже выполнил 2 пункта',
+		done: true
+	}, {
+		title: 'Отдохнуть после проделанной работы'
+	}];
 
 /***/ }
 /******/ ]);

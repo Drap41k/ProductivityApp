@@ -15,17 +15,12 @@ module.exports = {
 	],
 	module: {
 		loaders: [
-
 			{
 				test: /\.scss$/,
 				loader: ExtractTextPlugin.extract(
 					'style', // backup loader when not building .css file
 					'css!sass' // loaders to preprocess CSS
 				)
-			},
-			{
-				test: /\.css$/,
-				loader: ExtractTextPlugin.extract("style-loader", "css-loader")
 			},
 			{
 				test: /\.html$/,
