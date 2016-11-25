@@ -50,43 +50,43 @@
 
 	__webpack_require__(3);
 
-	__webpack_require__(5);
-
-	__webpack_require__(6);
-
 	__webpack_require__(7);
 
-	var _config = __webpack_require__(11);
+	__webpack_require__(8);
 
-	var _login = __webpack_require__(12);
+	__webpack_require__(9);
+
+	var _config = __webpack_require__(13);
+
+	var _login = __webpack_require__(14);
 
 	var _login2 = _interopRequireDefault(_login);
 
-	var _todo = __webpack_require__(16);
-
-	var _todo2 = _interopRequireDefault(_todo);
-
-	var _welcome = __webpack_require__(21);
+	var _welcome = __webpack_require__(23);
 
 	var _welcome2 = _interopRequireDefault(_welcome);
 
-	var _header = __webpack_require__(24);
+	var _todo = __webpack_require__(18);
+
+	var _todo2 = _interopRequireDefault(_todo);
+
+	var _header = __webpack_require__(26);
 
 	var _header2 = _interopRequireDefault(_header);
 
-	var _footer = __webpack_require__(28);
+	var _footer = __webpack_require__(30);
 
 	var _footer2 = _interopRequireDefault(_footer);
 
-	var _navigation = __webpack_require__(32);
+	var _navigation = __webpack_require__(34);
 
 	var _navigation2 = _interopRequireDefault(_navigation);
 
-	var _user = __webpack_require__(38);
+	var _user = __webpack_require__(40);
 
 	var _user2 = _interopRequireDefault(_user);
 
-	var _storage = __webpack_require__(39);
+	var _storage = __webpack_require__(41);
 
 	var _storage2 = _interopRequireDefault(_storage);
 
@@ -32753,7 +32753,9 @@
 
 
 /***/ },
-/* 5 */
+/* 5 */,
+/* 6 */,
+/* 7 */
 /***/ function(module, exports) {
 
 	/**
@@ -37367,7 +37369,7 @@
 	})(window, window.angular);
 
 /***/ },
-/* 6 */
+/* 8 */
 /***/ function(module, exports) {
 
 	/**
@@ -40499,16 +40501,16 @@
 
 
 /***/ },
-/* 7 */
+/* 9 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 8 */,
-/* 9 */,
 /* 10 */,
-/* 11 */
+/* 11 */,
+/* 12 */,
+/* 13 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -40518,10 +40520,12 @@
 	});
 	exports.config = config;
 	exports.run = run;
-	function config($stateProvider) {
+	function config($stateProvider, $locationProvider) {
 		$stateProvider.state('logout', {
 			url: '/logout'
 		});
+
+		$locationProvider.html5Mode(true);
 	}
 
 	function run($httpBackend, currentUser, $rootScope, $location, $state, storage) {
@@ -40561,10 +40565,11 @@
 			var response = [401, 'No such user or invalid password'];
 
 			while (index--) {
-				if (registeredUsers[index].username === userData.username) {
-					if (registeredUsers[index].password === userData.password) {
-						currentUser.setUser(registeredUsers[index]);
-						response = [200, registeredUsers[index]];
+				var user = registeredUsers[index];
+				if (user.username === userData.username) {
+					if (user.password === userData.password) {
+						currentUser.setUser(user);
+						response = [200, user];
 					}
 					break;
 				}
@@ -40575,7 +40580,7 @@
 	}
 
 /***/ },
-/* 12 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40584,11 +40589,11 @@
 		value: true
 	});
 
-	var _loginController = __webpack_require__(13);
+	var _loginController = __webpack_require__(15);
 
 	var _loginController2 = _interopRequireDefault(_loginController);
 
-	var _routes = __webpack_require__(14);
+	var _routes = __webpack_require__(16);
 
 	var _routes2 = _interopRequireDefault(_routes);
 
@@ -40600,7 +40605,7 @@
 			url: _routes2.default.login,
 			views: {
 				content: {
-					template: __webpack_require__(15),
+					template: __webpack_require__(17),
 					controller: 'formCtrl as form'
 				}
 			}
@@ -40608,7 +40613,7 @@
 	}).controller('formCtrl', ['$resource', '$location', 'currentUser', _loginController2.default]).name;
 
 /***/ },
-/* 13 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40639,7 +40644,7 @@
 		};
 	};
 
-	var _routes = __webpack_require__(14);
+	var _routes = __webpack_require__(16);
 
 	var _routes2 = _interopRequireDefault(_routes);
 
@@ -40648,7 +40653,7 @@
 	;
 
 /***/ },
-/* 14 */
+/* 16 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -40663,13 +40668,13 @@
 	};
 
 /***/ },
-/* 15 */
+/* 17 */
 /***/ function(module, exports) {
 
-	module.exports = "<form name=\"AuthorizeForm\" ng-submit=\"form.submit($event)\" novalidate>\n\t<input type=\"email\" name=\"username\" placeholder=\"username\" required />\n\t<input type=\"password\" name=\"password\" placeholder=\"password\" required />\n\t<!--<input type=\"text\" ng-model=\"form.xyu\" />-->\n\t<input type=\"submit\" value=\"Login\" />\n\t<!--<field type=\"text\" field-model=\"form.xyu\"></field>-->\n</form>";
+	module.exports = "<form name=\"AuthorizeForm\" ng-submit=\"form.submit($event)\" novalidate>\n\t<input type=\"email\" name=\"username\" placeholder=\"username\" required />\n\t<input type=\"password\" name=\"password\" placeholder=\"password\" required />\n\t<input type=\"submit\" value=\"Login\" />\n</form>";
 
 /***/ },
-/* 16 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40678,15 +40683,15 @@
 		value: true
 	});
 
-	var _todoController = __webpack_require__(17);
+	var _todoController = __webpack_require__(19);
 
 	var _todoController2 = _interopRequireDefault(_todoController);
 
-	var _routes = __webpack_require__(14);
+	var _routes = __webpack_require__(16);
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	__webpack_require__(18);
+	__webpack_require__(20);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -40699,7 +40704,7 @@
 					template: '<header></header>'
 				},
 				content: {
-					template: __webpack_require__(20),
+					template: __webpack_require__(22),
 					controller: 'todoCtrl as todo'
 				},
 				footer: {
@@ -40710,7 +40715,7 @@
 	}).controller('todoCtrl', ['currentUser', _todoController2.default]).name;
 
 /***/ },
-/* 17 */
+/* 19 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -40738,20 +40743,20 @@
 	;
 
 /***/ },
-/* 18 */
+/* 20 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 19 */,
-/* 20 */
+/* 21 */,
+/* 22 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"todo-page\">\n\t<div class=\"row\">\n\t\t<input ng-model=\"todo.newTask\" placeholder=\"Enter task title\" type=\"text\">\n\t\t<button ng-click=\"todo.addTask()\">+</button>\n\t</div>\n\t<ul class=\"list\">\n\t\t<li ng-repeat=\"item in todo.list\">\n\t\t\t<label ng-class=\"{strike: item.done}\">\n\t\t\t\t<input type=\"checkbox\" ng-model=\"item.done\" checked=\"{{item.done}}\" ng-change=\"todo.saveState()\">\n\t\t\t\t{{item.title}}\n\t\t\t</label>\n\t\t</li>\n\t</ul>\n</div>";
+	module.exports = "<div class=\"todo-page\">\n\t<div class=\"row\">\n\t\t<input ng-model=\"todo.newTask\" placeholder=\"Enter task title\" type=\"text\">\n\t\t<button ng-click=\"todo.addTask()\">+</button>\n\t</div>\n\t<ul class=\"list\">\n\t\t<li ng-repeat=\"item in todo.list\">\n\t\t\t<label ng-class=\"{strike: item.done}\">\n\t\t\t\t<input type=\"checkbox\" ng-model=\"item.done\" checked=\"{{item.done}}\" ng-change=\"todo.saveState()\">\n\t\t\t\t{{::item.title}}\n\t\t\t</label>\n\t\t</li>\n\t</ul>\n</div>";
 
 /***/ },
-/* 21 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40760,11 +40765,11 @@
 		value: true
 	});
 
-	var _welcomeController = __webpack_require__(22);
+	var _welcomeController = __webpack_require__(24);
 
 	var _welcomeController2 = _interopRequireDefault(_welcomeController);
 
-	var _routes = __webpack_require__(14);
+	var _routes = __webpack_require__(16);
 
 	var _routes2 = _interopRequireDefault(_routes);
 
@@ -40779,7 +40784,7 @@
 					template: '<header></header>'
 				},
 				content: {
-					template: __webpack_require__(23),
+					template: __webpack_require__(25),
 					controller: 'welcomeCtrl as welcome'
 				},
 				footer: {
@@ -40791,7 +40796,7 @@
 	//import headerComp from '../../shared/components/header';
 
 /***/ },
-/* 22 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40812,7 +40817,7 @@
 		};
 	};
 
-	var _routes = __webpack_require__(14);
+	var _routes = __webpack_require__(16);
 
 	var _routes2 = _interopRequireDefault(_routes);
 
@@ -40821,13 +40826,13 @@
 	;
 
 /***/ },
-/* 23 */
+/* 25 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\n\t<h1>Hello {{welcome.name}}</h1>\n\t<p>You have {{welcome.counter}} pending tasks</p>\n\t<button ng-click=\"welcome.next()\">Get to work!</button>\n</div>";
+	module.exports = "<div>\n\t<h1>Hello {{::welcome.name}}</h1>\n\t<p>You have {{::welcome.counter}} pending tasks</p>\n\t<button ng-click=\"welcome.next()\">Get to work!</button>\n</div>";
 
 /***/ },
-/* 24 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40836,28 +40841,28 @@
 		value: true
 	});
 
-	__webpack_require__(25);
+	__webpack_require__(27);
 
 	exports.default = {
 		name: 'header',
-		template: __webpack_require__(27)
+		template: __webpack_require__(29)
 	};
 
 /***/ },
-/* 25 */
+/* 27 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 26 */,
-/* 27 */
+/* 28 */,
+/* 29 */
 /***/ function(module, exports) {
 
 	module.exports = "<navigation id=\"nav\"></navigation>\n<a ui-sref=\"login\" class=\"logo\">Logo</a>\n<h1>Productivity</h1>\n";
 
 /***/ },
-/* 28 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40866,28 +40871,28 @@
 		value: true
 	});
 
-	__webpack_require__(29);
+	__webpack_require__(31);
 
 	exports.default = {
 		name: 'footer',
-		template: __webpack_require__(31)
+		template: __webpack_require__(33)
 	};
 
 /***/ },
-/* 29 */
+/* 31 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 30 */,
-/* 31 */
+/* 32 */,
+/* 33 */
 /***/ function(module, exports) {
 
 	module.exports = "<div>\n\t<p>&copy; Training guys Inc.</p>\n</div>";
 
 /***/ },
-/* 32 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40896,23 +40901,23 @@
 		value: true
 	});
 
-	var _navigationController = __webpack_require__(33);
+	var _navigationController = __webpack_require__(35);
 
 	var _navigationController2 = _interopRequireDefault(_navigationController);
 
-	__webpack_require__(35);
+	__webpack_require__(37);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
 		name: 'navigation',
-		template: __webpack_require__(37),
+		template: __webpack_require__(39),
 		controller: _navigationController2.default,
 		controllerAs: 'navigation'
 	};
 
 /***/ },
-/* 33 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40931,7 +40936,7 @@
 		};
 	};
 
-	var _menu = __webpack_require__(34);
+	var _menu = __webpack_require__(36);
 
 	var _menu2 = _interopRequireDefault(_menu);
 
@@ -40940,7 +40945,7 @@
 	;
 
 /***/ },
-/* 34 */
+/* 36 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -40959,20 +40964,20 @@
 	}];
 
 /***/ },
-/* 35 */
+/* 37 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 36 */,
-/* 37 */
+/* 38 */,
+/* 39 */
 /***/ function(module, exports) {
 
 	module.exports = "<div>\n\t<span class=\"button\" ng-click=\"navigation.opened = !navigation.opened\">Menu</span>\n\t<ul ng-show=\"navigation.opened\">\n\t\t<li ng-repeat=\"item in navigation.menu\">\n\t\t\t<a ui-sref=\"{{item.name}}\">{{item.title || item.name}}</a>\n\t\t</li>\n\t</ul>\n</div>";
 
 /***/ },
-/* 38 */
+/* 40 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -41017,7 +41022,7 @@
 	;
 
 /***/ },
-/* 39 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41055,7 +41060,7 @@
 		};
 	};
 
-	var _todo = __webpack_require__(40);
+	var _todo = __webpack_require__(42);
 
 	var _todo2 = _interopRequireDefault(_todo);
 
@@ -41064,7 +41069,7 @@
 	;
 
 /***/ },
-/* 40 */
+/* 42 */
 /***/ function(module, exports) {
 
 	'use strict';

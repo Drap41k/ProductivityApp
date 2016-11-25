@@ -4,7 +4,8 @@
   "description": "some app for todo list",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "server": "npm run start"
   },
   "author": "dkonoplin",
   "license": "ISC",

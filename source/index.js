@@ -9,8 +9,8 @@ import './general.scss';
 import {config, run} from './config/config'
 
 import loginPage from './pages/login';
-import todoPage from './pages/todo';
 import welcomePage from './pages/welcome';
+import todoPage from './pages/todo';
 
 import headerComponent from './shared/components/header';
 import footerComponent from './shared/components/footer';
@@ -25,6 +25,5 @@ angular.module('productivityApp', ['ngMockE2E', 'ngResource', 'ui.router', login
 	.component('header', headerComponent)
 	.component('footer', footerComponent)
 	.component('navigation', navComponent)
-
 	.factory('currentUser', userService)
 	.factory('storage', storageService);

@@ -14,7 +14,7 @@ bower install
 Then you need to start server:
 
 ```sh
-node server.js
+npm run start
 ```
 
-Now application is available on [http://localhost:3000/#](http://localhost:3000/#/list)
+Now application is available on [http://localhost:3000](http://localhost:3000)

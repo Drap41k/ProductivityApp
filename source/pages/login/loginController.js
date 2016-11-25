@@ -3,7 +3,7 @@ import ROUTES_SCHEMA from '../../config/routes';
 export default function($resource, $location) {
 	this.submit = function(e) {
 		e.preventDefault();
-		let result = {};
+		const result = {};
 		const inputs = e.target.elements;
 		for (let i = 0; i < inputs.length; i++) {
 			const input = inputs[i];

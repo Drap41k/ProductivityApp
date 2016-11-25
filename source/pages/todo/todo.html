@@ -7,7 +7,7 @@
 		<li ng-repeat="item in todo.list">
 			<label ng-class="{strike: item.done}">
 				<input type="checkbox" ng-model="item.done" checked="{{item.done}}" ng-change="todo.saveState()">
-				{{item.title}}
+				{{::item.title}}
 			</label>
 		</li>
 	</ul>

@@ -1,7 +1,9 @@
-export function config($stateProvider) {
+export function config($stateProvider, $locationProvider) {
 	$stateProvider.state('logout', {
 		url: '/logout'
 	});
+
+	$locationProvider.html5Mode(true);
 }
 
 export function run($httpBackend, currentUser, $rootScope, $location, $state, storage) {
@@ -42,10 +44,11 @@ export function run($httpBackend, currentUser, $rootScope, $location, $state, st
 		let response = [401, 'No such user or invalid password'];
 
 		while (index--) {
-			if (registeredUsers[index].username === userData.username) {
-				if (registeredUsers[index].password === userData.password) {
-					currentUser.setUser(registeredUsers[index]);
-					response = [200, registeredUsers[index]];
+			const user = registeredUsers[index];
+			if (user.username === userData.username) {
+				if (user.password === userData.password) {
+					currentUser.setUser(user);
+					response = [200, user];
 				}
 				break;
 			}
