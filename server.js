@@ -9,3 +9,7 @@ app.listen(3000, function () {
 
 app.use(express.static('public'));
 app.use('/bower', express.static('bower_components'));
+
+app.all('/*', function (req, res) {
+	res.sendFile('index.html', {root: __dirname + '/public/'});
+});

@@ -50,43 +50,43 @@
 
 	__webpack_require__(3);
 
+	__webpack_require__(5);
+
+	__webpack_require__(6);
+
 	__webpack_require__(7);
 
-	__webpack_require__(8);
+	var _config = __webpack_require__(11);
 
-	__webpack_require__(9);
-
-	var _config = __webpack_require__(13);
-
-	var _login = __webpack_require__(14);
+	var _login = __webpack_require__(12);
 
 	var _login2 = _interopRequireDefault(_login);
 
-	var _welcome = __webpack_require__(23);
+	var _welcome = __webpack_require__(16);
 
 	var _welcome2 = _interopRequireDefault(_welcome);
 
-	var _todo = __webpack_require__(18);
+	var _todo = __webpack_require__(19);
 
 	var _todo2 = _interopRequireDefault(_todo);
 
-	var _header = __webpack_require__(26);
+	var _header = __webpack_require__(24);
 
 	var _header2 = _interopRequireDefault(_header);
 
-	var _footer = __webpack_require__(30);
+	var _footer = __webpack_require__(28);
 
 	var _footer2 = _interopRequireDefault(_footer);
 
-	var _navigation = __webpack_require__(34);
+	var _navigation = __webpack_require__(32);
 
 	var _navigation2 = _interopRequireDefault(_navigation);
 
-	var _user = __webpack_require__(40);
+	var _user = __webpack_require__(38);
 
 	var _user2 = _interopRequireDefault(_user);
 
-	var _storage = __webpack_require__(41);
+	var _storage = __webpack_require__(39);
 
 	var _storage2 = _interopRequireDefault(_storage);
 
@@ -32753,9 +32753,7 @@
 
 
 /***/ },
-/* 5 */,
-/* 6 */,
-/* 7 */
+/* 5 */
 /***/ function(module, exports) {
 
 	/**
@@ -37369,7 +37367,7 @@
 	})(window, window.angular);
 
 /***/ },
-/* 8 */
+/* 6 */
 /***/ function(module, exports) {
 
 	/**
@@ -40501,16 +40499,16 @@
 
 
 /***/ },
-/* 9 */
+/* 7 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
+/* 8 */,
+/* 9 */,
 /* 10 */,
-/* 11 */,
-/* 12 */,
-/* 13 */
+/* 11 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -40580,7 +40578,7 @@
 	}
 
 /***/ },
-/* 14 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40589,11 +40587,11 @@
 		value: true
 	});
 
-	var _loginController = __webpack_require__(15);
+	var _loginController = __webpack_require__(13);
 
 	var _loginController2 = _interopRequireDefault(_loginController);
 
-	var _routes = __webpack_require__(16);
+	var _routes = __webpack_require__(14);
 
 	var _routes2 = _interopRequireDefault(_routes);
 
@@ -40605,7 +40603,7 @@
 			url: _routes2.default.login,
 			views: {
 				content: {
-					template: __webpack_require__(17),
+					template: __webpack_require__(15),
 					controller: 'formCtrl as form'
 				}
 			}
@@ -40613,7 +40611,7 @@
 	}).controller('formCtrl', ['$resource', '$location', 'currentUser', _loginController2.default]).name;
 
 /***/ },
-/* 15 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40644,7 +40642,7 @@
 		};
 	};
 
-	var _routes = __webpack_require__(16);
+	var _routes = __webpack_require__(14);
 
 	var _routes2 = _interopRequireDefault(_routes);
 
@@ -40653,7 +40651,7 @@
 	;
 
 /***/ },
-/* 16 */
+/* 14 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -40668,13 +40666,13 @@
 	};
 
 /***/ },
-/* 17 */
+/* 15 */
 /***/ function(module, exports) {
 
 	module.exports = "<form name=\"AuthorizeForm\" ng-submit=\"form.submit($event)\" novalidate>\n\t<input type=\"email\" name=\"username\" placeholder=\"username\" required />\n\t<input type=\"password\" name=\"password\" placeholder=\"password\" required />\n\t<input type=\"submit\" value=\"Login\" />\n</form>";
 
 /***/ },
-/* 18 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40683,15 +40681,91 @@
 		value: true
 	});
 
-	var _todoController = __webpack_require__(19);
+	var _welcomeController = __webpack_require__(17);
 
-	var _todoController2 = _interopRequireDefault(_todoController);
+	var _welcomeController2 = _interopRequireDefault(_welcomeController);
 
-	var _routes = __webpack_require__(16);
+	var _routes = __webpack_require__(14);
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	__webpack_require__(20);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = window.angular.module('productivityApp.welcome', []).config(function ($stateProvider) {
+		$stateProvider.state({
+			name: 'welcome',
+			url: _routes2.default.welcome,
+			views: {
+				header: {
+					template: '<header></header>'
+				},
+				content: {
+					template: __webpack_require__(18),
+					controller: 'welcomeCtrl as welcome'
+				},
+				footer: {
+					template: '<footer></footer>'
+				}
+			}
+		});
+	}).controller('welcomeCtrl', ['$location', 'currentUser', _welcomeController2.default]).name;
+	//import headerComp from '../../shared/components/header';
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	exports.default = function ($location, currentUser) {
+		var user = currentUser.getUser();
+		this.name = user.username;
+		this.counter = user.list.filter(function (item) {
+			return !item.done;
+		}).length;
+
+		this.next = function () {
+			$location.path(_routes2.default.list);
+		};
+	};
+
+	var _routes = __webpack_require__(14);
+
+	var _routes2 = _interopRequireDefault(_routes);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	;
+
+/***/ },
+/* 18 */
+/***/ function(module, exports) {
+
+	module.exports = "<div>\n\t<h1>Hello <span data-ng-bind=\"::welcome.name\"></span></h1>\n\t<p>You have <span data-ng-bind=\"::welcome.counter\"></span> pending tasks</p>\n\t<button ng-click=\"welcome.next()\">Get to work!</button>\n</div>";
+
+/***/ },
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _todoController = __webpack_require__(20);
+
+	var _todoController2 = _interopRequireDefault(_todoController);
+
+	var _routes = __webpack_require__(14);
+
+	var _routes2 = _interopRequireDefault(_routes);
+
+	__webpack_require__(21);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -40704,7 +40778,7 @@
 					template: '<header></header>'
 				},
 				content: {
-					template: __webpack_require__(22),
+					template: __webpack_require__(23),
 					controller: 'todoCtrl as todo'
 				},
 				footer: {
@@ -40715,7 +40789,7 @@
 	}).controller('todoCtrl', ['currentUser', _todoController2.default]).name;
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -40743,57 +40817,17 @@
 	;
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 21 */,
-/* 22 */
+/* 22 */,
+/* 23 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"todo-page\">\n\t<div class=\"row\">\n\t\t<input ng-model=\"todo.newTask\" placeholder=\"Enter task title\" type=\"text\">\n\t\t<button ng-click=\"todo.addTask()\">+</button>\n\t</div>\n\t<ul class=\"list\">\n\t\t<li ng-repeat=\"item in todo.list\">\n\t\t\t<label ng-class=\"{strike: item.done}\">\n\t\t\t\t<input type=\"checkbox\" ng-model=\"item.done\" checked=\"{{item.done}}\" ng-change=\"todo.saveState()\">\n\t\t\t\t{{::item.title}}\n\t\t\t</label>\n\t\t</li>\n\t</ul>\n</div>";
-
-/***/ },
-/* 23 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _welcomeController = __webpack_require__(24);
-
-	var _welcomeController2 = _interopRequireDefault(_welcomeController);
-
-	var _routes = __webpack_require__(16);
-
-	var _routes2 = _interopRequireDefault(_routes);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = window.angular.module('productivityApp.welcome', []).config(function ($stateProvider) {
-		$stateProvider.state({
-			name: 'welcome',
-			url: _routes2.default.welcome,
-			views: {
-				header: {
-					template: '<header></header>'
-				},
-				content: {
-					template: __webpack_require__(25),
-					controller: 'welcomeCtrl as welcome'
-				},
-				footer: {
-					template: '<footer></footer>'
-				}
-			}
-		});
-	}).controller('welcomeCtrl', ['$location', 'currentUser', _welcomeController2.default]).name;
-	//import headerComp from '../../shared/components/header';
 
 /***/ },
 /* 24 */
@@ -40805,64 +40839,28 @@
 		value: true
 	});
 
-	exports.default = function ($location, currentUser) {
-		var user = currentUser.getUser();
-		this.name = user.username;
-		this.counter = user.list.filter(function (item) {
-			return !item.done;
-		}).length;
+	__webpack_require__(25);
 
-		this.next = function () {
-			$location.path(_routes2.default.list);
-		};
+	exports.default = {
+		name: 'header',
+		template: __webpack_require__(27)
 	};
-
-	var _routes = __webpack_require__(16);
-
-	var _routes2 = _interopRequireDefault(_routes);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	;
 
 /***/ },
 /* 25 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\n\t<h1>Hello {{::welcome.name}}</h1>\n\t<p>You have {{::welcome.counter}} pending tasks</p>\n\t<button ng-click=\"welcome.next()\">Get to work!</button>\n</div>";
-
-/***/ },
-/* 26 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	__webpack_require__(27);
-
-	exports.default = {
-		name: 'header',
-		template: __webpack_require__(29)
-	};
-
-/***/ },
-/* 27 */
-/***/ function(module, exports) {
-
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 28 */,
-/* 29 */
+/* 26 */,
+/* 27 */
 /***/ function(module, exports) {
 
 	module.exports = "<navigation id=\"nav\"></navigation>\n<a ui-sref=\"login\" class=\"logo\">Logo</a>\n<h1>Productivity</h1>\n";
 
 /***/ },
-/* 30 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40871,28 +40869,28 @@
 		value: true
 	});
 
-	__webpack_require__(31);
+	__webpack_require__(29);
 
 	exports.default = {
 		name: 'footer',
-		template: __webpack_require__(33)
+		template: __webpack_require__(31)
 	};
 
 /***/ },
-/* 31 */
+/* 29 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 32 */,
-/* 33 */
+/* 30 */,
+/* 31 */
 /***/ function(module, exports) {
 
 	module.exports = "<div>\n\t<p>&copy; Training guys Inc.</p>\n</div>";
 
 /***/ },
-/* 34 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40901,23 +40899,23 @@
 		value: true
 	});
 
-	var _navigationController = __webpack_require__(35);
+	var _navigationController = __webpack_require__(33);
 
 	var _navigationController2 = _interopRequireDefault(_navigationController);
 
-	__webpack_require__(37);
+	__webpack_require__(35);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
 		name: 'navigation',
-		template: __webpack_require__(39),
+		template: __webpack_require__(37),
 		controller: _navigationController2.default,
 		controllerAs: 'navigation'
 	};
 
 /***/ },
-/* 35 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40936,7 +40934,7 @@
 		};
 	};
 
-	var _menu = __webpack_require__(36);
+	var _menu = __webpack_require__(34);
 
 	var _menu2 = _interopRequireDefault(_menu);
 
@@ -40945,7 +40943,7 @@
 	;
 
 /***/ },
-/* 36 */
+/* 34 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -40964,20 +40962,20 @@
 	}];
 
 /***/ },
-/* 37 */
+/* 35 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 38 */,
-/* 39 */
+/* 36 */,
+/* 37 */
 /***/ function(module, exports) {
 
 	module.exports = "<div>\n\t<span class=\"button\" ng-click=\"navigation.opened = !navigation.opened\">Menu</span>\n\t<ul ng-show=\"navigation.opened\">\n\t\t<li ng-repeat=\"item in navigation.menu\">\n\t\t\t<a ui-sref=\"{{item.name}}\">{{item.title || item.name}}</a>\n\t\t</li>\n\t</ul>\n</div>";
 
 /***/ },
-/* 40 */
+/* 38 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -41022,7 +41020,7 @@
 	;
 
 /***/ },
-/* 41 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41060,7 +41058,7 @@
 		};
 	};
 
-	var _todo = __webpack_require__(42);
+	var _todo = __webpack_require__(40);
 
 	var _todo2 = _interopRequireDefault(_todo);
 
@@ -41069,7 +41067,7 @@
 	;
 
 /***/ },
-/* 42 */
+/* 40 */
 /***/ function(module, exports) {
 
 	'use strict';
